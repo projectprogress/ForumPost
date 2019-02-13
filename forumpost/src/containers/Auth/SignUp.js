@@ -22,7 +22,7 @@ class SignUp extends Component {
     }
     render() {
         // const { authError, auth } = this.props;
-        if(auth.uid) return <Redirect to='/' />
+        // if(auth.uid) return <Redirect to='/' />
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
@@ -48,7 +48,7 @@ class SignUp extends Component {
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">SIGN UP</button>
                         <div className="red-text center">
-                            {authError ? <p>{authError}</p> : null}
+                            {/* {authError ? <p>{authError}</p> : null} */}
                         </div>
                     </div>
 

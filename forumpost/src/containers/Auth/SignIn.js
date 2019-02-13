@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 
 class SignIn extends Component {
     state = {
@@ -19,8 +18,8 @@ class SignIn extends Component {
         this.props.signIn(this.state);
     }
     render() {
-        const { authError, auth } = this.props;
-        if(auth.uid) return <Redirect to='/' />
+        // const { authError, auth } = this.props;
+        // if(auth.uid) return <Redirect to='/' />
 
         return (
             <div className="container">
@@ -37,7 +36,7 @@ class SignIn extends Component {
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Login</button>
                         <div className="red-text center">
-                            {authError ? <p>{authError}</p> : null}
+                            {/* {authError ? <p>{authError}</p> : null} */}
                         </div>
                     </div>
                 </form>

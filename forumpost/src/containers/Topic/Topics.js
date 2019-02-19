@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TopicSummary from './TopicSummary';
+import TopicSummary from '../../components/TopicSummary/TopicSummary';
 
 
 class Topics extends Component {

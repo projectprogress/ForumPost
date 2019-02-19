@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class SignIn extends Component {
     state = {
@@ -17,13 +18,17 @@ class SignIn extends Component {
         // console.log(this.state)
         this.props.signIn(this.state);
     }
+
+    handleSignUp = () => {
+        this.props.history.push('/signup');
+    }
     render() {
         // const { authError, auth } = this.props;
         // if(auth.uid) return <Redirect to='/' />
 
         return (
             <div className="container">
-                <form onSubmit={this.handleSubmit} className="white">
+                <form className="white">
                     <h5 className="grey-text text-darken-3">Sign In</h5>
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
@@ -34,7 +39,8 @@ class SignIn extends Component {
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Login</button>
+                        <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSubmit}>Login</button>
+                        <button className="btn pink lighten-1 z-depth-0" onClick={this.handleSignUp}>SignUp</button>
                         <div className="red-text center">
                             {/* {authError ? <p>{authError}</p> : null} */}
                         </div>
@@ -58,4 +64,4 @@ class SignIn extends Component {
 //     }
 // }
 
-export default SignIn;
+export default withRouter(SignIn);

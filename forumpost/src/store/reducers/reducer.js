@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import { bake_cookie, read_cookie } from 'sfcookies';
 
 const initialState = {
     // symbol:'',
@@ -8,7 +9,8 @@ const initialState = {
     // latestSource:'',
     // week52High:'',
     // week52Low:''
-    stockData: []
+    stockData: [],
+    watchList: read_cookie('WatchList')
 }
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +31,32 @@ const reducer = (state = initialState, action) => {
                 // latestSource: action.stockData.latestSource,
                 // week52High: action.stockData.week52High,
                 // week52Low: action.stockData.week52Low
+            };
+        case actionTypes.ADD_WATCHLIST :
+            console.log('add success');
+            console.log(action.stockData);
+            let stockWatchList = state.watchList;
+            stockWatchList.push(action.stockData);
+            bake_cookie('WatchList', stockWatchList);
+            console.log(stockWatchList);
+            return {
+                ...state,
+                watchList: stockWatchList
+            };
+        case actionTypes.DELETE_WATCHLIST : 
+            console.log('Delete success');
+            console.log(action.DelSymbolIndex);
+            // const indexNum = parseInt(action.DelSymbolIndex, 10);  
+            const newstockWatchList = state.watchList.filter((item, index) => action.DelSymbolIndex !== index);;
+            console.log(newstockWatchList);
+            return {
+                ...state,
+                watchList: newstockWatchList
+            };
+        case actionTypes.SHOW_WATCHLIST : 
+            return {
+                ...state,
+                watchList: action.stockData
             };
         default:
             return state;

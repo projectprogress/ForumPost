@@ -24,3 +24,24 @@ export const fetchSymbolSuccess = (stockData) => {
         stockData: stockData
     };
 };
+
+// export const addWatchList = (stockData) => {
+//     return dispatch => {
+//         console.log(stockData);
+//         bake_cookie('watchlist', stockData)
+//     }
+// }
+
+export const deleteWatchList = (DelSymbolIndex) => {
+    return {
+        type: actionTypes.DELETE_WATCHLIST,
+        DelSymbolIndex: DelSymbolIndex
+    };
+};
+
+export const successAddWatchList = (stockData) => {
+    return {
+        type: actionTypes.ADD_WATCHLIST,
+        stockData: stockData
+    };
+};

@@ -1,4 +1,9 @@
 .NavigationItems {
+    height: 5px;
     padding-right: 10px;
     margin-right: 10px;
+}
+
+.SearchBar {
+    height: 10px;
 }

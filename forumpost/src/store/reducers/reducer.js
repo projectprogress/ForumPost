@@ -10,7 +10,9 @@ const initialState = {
     // week52High:'',
     // week52Low:''
     stockData: [],
-    watchList: read_cookie('WatchList')
+    watchList: read_cookie('WatchList'),
+    FocusList: [],
+    focusListError: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,13 +26,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 stockData: action.stockData
-                // symbol: action.stockData.symbol,
-                // companyName: action.stockData.companyName,
-                // primaryExchange: action.stockData.primaryExchange,
-                // latestPrice: action.stockData.latestPrice,
-                // latestSource: action.stockData.latestSource,
-                // week52High: action.stockData.week52High,
-                // week52Low: action.stockData.week52Low
             };
         case actionTypes.ADD_WATCHLIST :
             console.log('add success');
@@ -57,6 +52,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 watchList: action.stockData
+            };
+        case actionTypes.FETCH_FOCUS_SUCCESS : 
+            return {
+                ...state,
+                FocusList: action.focusList
+            };
+        case actionTypes.FETCH_FOCUS_FAIL : 
+            return {
+                ...state,
+                focusListError: true
             };
         default:
             return state;

@@ -1,3 +1,6 @@
+html {
+  min-height: 100%;
+}
 body {
   margin: 0;
   padding: 0;
@@ -6,11 +9,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(/Image/Stock_Market_background.png) no-repeat;
-  background-size: 100%;
-  background-position: bottom;
+  background: url(/Image/Stock_Market_background.png) no-repeat center center fixed;
+  /* background-size: 100%;
+  background-position: center;
   background-color: #95e8f3; 
-  min-height: 100%;
+  min-height: 100%; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 form {
@@ -24,11 +31,6 @@ form button {
 
 div button {
   margin: 10px;
-}
-
-
-html {
-  min-height: 100%;
 }
 
 code {

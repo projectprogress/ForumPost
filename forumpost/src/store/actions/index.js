@@ -1,5 +1,6 @@
 export {
     searchSymbol,
     successAddWatchList,
-    deleteWatchList
+    deleteWatchList,
+    showFocusList
 } from './action';

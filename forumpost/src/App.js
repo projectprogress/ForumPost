@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navigation/Navbar';
 import CreateTopic from './containers/Topic/CreateTopic';
-import Topics from './containers/Topic/Topics';
+import Dashboard from './components/Dashboard/Dashboard';
 import SignIn from './containers/Auth/SignIn';
 import SignUp from './containers/Auth/SignUp';
 import SearchResult from './components/SearchResult/SearchResult';
@@ -14,7 +14,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path='/' component={Topics} />
+          <Route exact path='/' component={Dashboard} />
           <Route path='/createtopic' component = {CreateTopic} />
           <Route path='/signin' component = {SignIn} />
           <Route path='/signup' component = {SignUp} />

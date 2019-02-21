@@ -9,18 +9,19 @@ class Topics extends Component {
     }
     render() {
         return(
-            <div className="dashboard container">
+            <div>
+            {/* <div className="dashboard container">
                 <div className="row">
                     <div className="col s12 m6">
-                        <div className="project-list section">
+                        <div className="project-list section"> */}
                             
                             <TopicSummary topic={this.state} />
                             <TopicSummary topic={this.state} />
                             <TopicSummary topic={this.state} />
                                 
-                        </div>
+                        {/* </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

@@ -40,7 +40,7 @@ class searchResult extends Component {
 
 const mapStateToProps = state => {
     return {
-        stockData: state.stockData
+        stockData: state.reducer.stockData
     };
 };
 

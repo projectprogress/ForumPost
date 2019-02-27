@@ -7,6 +7,7 @@ import SignIn from './containers/Auth/SignIn';
 import SignUp from './containers/Auth/SignUp';
 import SearchResult from './components/SearchResult/SearchResult';
 import WatchList from './containers/WatchList/WatchList';
+import Logout from './containers/Auth/Signout';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path='/signup' component = {SignUp} />
           <Route path='/searchresult' component = {SearchResult} />
           <Route path='/watchlist' component = {WatchList} />
+          <Route path='/logout' component = {Logout} />
         </Switch>
       </div>
 

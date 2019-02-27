@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
 
 class SignUp extends Component {
     state = {
         email:'',
         password:'',
         firstName:'',
-        lastName:''
+        lastName:'',
+        isSignup: true
     }
     handleChange = (e) => {
         // console.log(e)
@@ -18,7 +21,8 @@ class SignUp extends Component {
         // console.log(e)
         e.preventDefault();
         // console.log(this.state);
-        this.props.signUp(this.state);
+        // this.props.signUp(this.state);
+        this.props.onAuth(this.state.email, this.state.password, this.state.isSignup);
     }
     render() {
         // const { authError, auth } = this.props;
@@ -59,5 +63,11 @@ class SignUp extends Component {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+        // onSetAuthRedirectPath: ()  => dispatch(actions.setAuthRedirectPath('/'))
+    };
+};
 
-export default SignUp
+export default connect(null,mapDispatchToProps)(SignUp);

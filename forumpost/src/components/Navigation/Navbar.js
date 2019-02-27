@@ -25,8 +25,14 @@ class navbar extends Component {
 
     // const { auth, profile } = props;
     // console.log(auth);
+    
     // const links = auth.uid ? <SignedInLinks profile={profile}/> : <SignedOutLinks />;
     render() {
+        // const links = this.props.isAuthenticated ?  <li><NavLink to='/signin'>Sign In</NavLink></li>;
+        let links = <li><NavLink to='/signin'>Sign In</NavLink></li>;
+        if(this.props.isAuthenticated){
+            links = <li><NavLink to='/logout'>Logout</NavLink></li>
+        }
         return (
             <nav className="nav-wrapper grey darken-3">
                   <div className="container mr-auto">
@@ -39,7 +45,8 @@ class navbar extends Component {
                         <li><button onClick={this.handleSubmit} className="btn blue lighten-1 z-depth-0">Search</button></li>
                     </ul>
                   <ul className="right">
-                      <li><NavLink to='/signin'>Sign In</NavLink></li>
+                      {/* <li><NavLink to='/signin'>Sign In</NavLink></li> */}
+                      {links}
                   </ul>
                   </div>
               </nav>
@@ -50,6 +57,7 @@ class navbar extends Component {
 const mapStateToProps = state => {
     return {
         // stockData: state.stockData
+        isAuthenticated: state.auth.token !== null
     };
 };
 

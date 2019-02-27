@@ -25,7 +25,7 @@ class FocusList extends Component {
             result = (
                 <div>
                     {this.props.FocusList.map((listItem, index) => (
-                        <div>
+                        <div key = {index}>
                             <FocusSummary 
                                         focusList= {listItem}/>    
                         </div>
@@ -48,8 +48,8 @@ class FocusList extends Component {
 
 const mapStateToProps = state => {
     return {
-        FocusList: state.FocusList,
-        focusListError: state.focusListError
+        FocusList: state.reducer.FocusList,
+        focusListError: state.reducer.focusListError
     };
 };
 

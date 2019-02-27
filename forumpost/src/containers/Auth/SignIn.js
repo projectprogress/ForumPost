@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 class SignIn extends Component {
     state = {
         email:'',
-        password:''
+        password:'',
+        isSignup: false
     }
     handleChange = (e) => {
         // console.log(e)
@@ -16,7 +20,9 @@ class SignIn extends Component {
         // console.log(e)
         e.preventDefault();
         // console.log(this.state)
-        this.props.signIn(this.state);
+        // this.props.signIn(this.state);
+        this.props.onAuth(this.state.email, this.state.password, this.state.isSignup);
+        // this.props.onAuth(this.state.email.value, this.state.password.value);
     }
 
     handleSignUp = () => {
@@ -25,9 +31,14 @@ class SignIn extends Component {
     render() {
         // const { authError, auth } = this.props;
         // if(auth.uid) return <Redirect to='/' />
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={this.props.authRedirectPath}/>
+        }
 
         return (
             <div className="container">
+                {authRedirect}
                 <form className="white">
                     <h5 className="grey-text text-darken-3">Sign In</h5>
                     <div className="input-field">
@@ -58,10 +69,20 @@ class SignIn extends Component {
 //     }
 // }
 
-// const mapDispatchToProps = (dispatch)  => {
-//     return {
-//         signIn: (creds) => dispatch(signIn(creds))
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+        authRedirectPath: state.auth.authRedirectPath
+    };
+};
 
-export default withRouter(SignIn);
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+        // onSetAuthRedirectPath: ()  => dispatch(actions.setAuthRedirectPath('/'))
+    };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));

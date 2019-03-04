@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 class CreateTopic extends Component {
     state = {
@@ -15,14 +17,27 @@ class CreateTopic extends Component {
     handleSubmit = (e) => {
         // console.log(e)
         e.preventDefault();
-        // console.log(this.state);
-        // this.props.createProject(this.state)
+        console.log(this.state);
+        this.props.createTopic(this.state.title, this.state.content, this.props.email);
         // this.props.history.push('/');
 
     }
+    componentWillMount() {
+        console.log('componentWillMount');
+        this.props.createInit();
+
+    }
+
     render() {
+        let authRedirect = null;
+        if (this.props.isAuthenticated === false) {
+            authRedirect = <Redirect to='/signin'/>
+        }
+        const createRedirect = this.props.created ? <Redirect to="/" /> : null
         return (
             <div className="container">
+                {authRedirect}
+                {createRedirect}
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Create Topic</h5>
                     <div className="input-field">
@@ -43,16 +58,20 @@ class CreateTopic extends Component {
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         auth: state.firebase.auth
-//     }
-// }
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.token !== null,
+        email: state.auth.email,
+        authRedirectPath: state.auth.authRedirectPath,
+        created: state.topic.created
+    }
+}
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         createProject: (project) => dispatch(createProject(project))
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createTopic: (title, content, email) => dispatch(actions.createTopic(title, content, email)),
+        createInit: () => dispatch(actions.createInit())
+    }
+}
 
-export default CreateTopic;
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTopic);

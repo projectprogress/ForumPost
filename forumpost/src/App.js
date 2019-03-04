@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navigation/Navbar';
+import Navbar from './containers/Navigation/Navbar';
 import CreateTopic from './containers/Topic/CreateTopic';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignIn from './containers/Auth/SignIn';
 import SignUp from './containers/Auth/SignUp';
-import SearchResult from './components/SearchResult/SearchResult';
+import SearchResult from './containers/SearchResult/SearchResult';
 import WatchList from './containers/WatchList/WatchList';
 import Logout from './containers/Auth/Signout';
 

@@ -1,5 +1,8 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
+import firebase from 'firebase/app';
+import 'firebase/database'; // If using Firebase database
+import 'firebase/storage'; 
 
 export const authStart = () => {
     return {
@@ -39,7 +42,61 @@ export const checkAuthTimeout = (expirationTime) => {
     };
 };
 
-export const auth = (email, password, isSignup) => {
+export const createUserTable = (idToken, userId, firstName, lastName, email) => {
+    return dispatch => {
+        const user = {
+            userId: userId,
+            userFirstName: firstName,
+            userLastName: lastName,
+            initials: firstName[0] + lastName[0],
+            email: email
+        }
+        firebase.database().ref('/users/')
+            .child(userId)
+            .set(user)
+            .then(() => {
+                dispatch(getUserData(userId));
+                dispatch(authSuccess(idToken, userId));
+            });
+       
+    };
+};
+
+export const getUserData = (userId) => {
+    return dispatch => {
+        console.log(userId);
+        // var ref = firebase.database().ref("users");
+        // var query = ref.orderByChild("database/email").equalTo(userId);
+        // query.once("value", function(snapshot) {
+        //     snapshot.forEach(function(child) {
+        //         console.log(child.key, child.val());
+        //     });
+        // });
+        // axios.get('https://forumpost-24969.firebaseio.com/users/' + response.data.name + '.json')
+        // axios.get('https://forumpost-24969.firebaseio.com/users.json', userId)
+        // axios.get('https://forumpost-24969.firebaseio.com/users/?userId='+ userId +'.json')
+        axios.get('https://forumpost-24969.firebaseio.com/users/' + userId + '.json')
+            .then(response => {
+                console.log( response.data);
+                dispatch(getUserSuccess(response.data.initials, response.data.email));
+               
+            })
+            .catch(error => {
+                console.log( error);
+              
+            });
+    };
+};
+
+export const getUserSuccess = (initials, email) => {
+    return {
+        type: actionTypes.GET_USER_SUCCESS,
+        initials: initials,
+        email: email
+    };
+};
+
+export const auth = (email, password, isSignup, firstName, lastName) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
@@ -59,7 +116,15 @@ export const auth = (email, password, isSignup) => {
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
                 localStorage.setItem('userId', response.data.localId);
-                dispatch(authSuccess(response.data.idToken, response.data.localId));
+                if(isSignup === true){
+                    dispatch(createUserTable(response.data.idToken, response.data.localId, firstName, lastName, email));
+                }
+                else {
+                    dispatch(getUserData(response.data.localId));
+                    dispatch(authSuccess(response.data.idToken, response.data.localId));
+                }
+                // dispatch(getUserData(response.data.localId));
+                
                 dispatch(checkAuthTimeout(response.data.expiresIn));
             })
             .catch(err => {

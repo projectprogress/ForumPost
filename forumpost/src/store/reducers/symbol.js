@@ -2,20 +2,13 @@ import * as actionTypes from '../actions/actionTypes';
 import { bake_cookie, read_cookie } from 'sfcookies';
 
 const initialState = {
-    // symbol:'',
-    // companyName:'',
-    // primaryExchange:'',
-    // latestPrice:'',
-    // latestSource:'',
-    // week52High:'',
-    // week52Low:''
     stockData: [],
     watchList: read_cookie('WatchList'),
     FocusList: [],
     focusListError: false
 }
 
-const reducer = (state = initialState, action) => {
+const symbol = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SEARCH_SYMBOL:
             console.log('search symbol');
@@ -68,4 +61,4 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export default reducer;
+export default symbol;

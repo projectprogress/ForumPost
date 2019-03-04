@@ -19,21 +19,16 @@ class SignIn extends Component {
     handleSubmit = (e) => {
         // console.log(e)
         e.preventDefault();
-        // console.log(this.state)
-        // this.props.signIn(this.state);
-        this.props.onAuth(this.state.email, this.state.password, this.state.isSignup);
-        // this.props.onAuth(this.state.email.value, this.state.password.value);
+        this.props.onAuth(this.state.email, this.state.password, this.state.isSignup, null, null);
     }
 
     handleSignUp = () => {
         this.props.history.push('/signup');
     }
     render() {
-        // const { authError, auth } = this.props;
-        // if(auth.uid) return <Redirect to='/' />
         let authRedirect = null;
         if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to={this.props.authRedirectPath}/>
+            authRedirect = <Redirect to='/'/>
         }
 
         return (
@@ -62,12 +57,7 @@ class SignIn extends Component {
         )
     }
 }
-// const mapStateToProps = (state) => {
-//     return {
-//         authError: state.auth.authError,
-//         auth: state.firebase.auth
-//     }
-// }
+
 
 const mapStateToProps = state => {
     return {
@@ -80,8 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
-        // onSetAuthRedirectPath: ()  => dispatch(actions.setAuthRedirectPath('/'))
+        onAuth: (email, password, isSignup, firstName, lastName) => dispatch(actions.auth(email, password, isSignup, firstName, lastName))
     };
 };
 

@@ -6,15 +6,31 @@ import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import reducer from './store/reducers/reducer';
+import symbol from './store/reducers/symbol';
 import authReducer from './store/reducers/auth';
+import topic from './store/reducers/topic';
 import thunk from 'redux-thunk';
+import firebase from 'firebase/app';
+import 'firebase/database'; 
+import 'firebase/storage'; 
+
+const config = {
+    apiKey: "AIzaSyDmTTIZUKYF729ULIm7tpUYqiKQtiEASsc",
+    authDomain: "forumpost-24969.firebaseapp.com",
+    databaseURL: "https://forumpost-24969.firebaseio.com",
+    projectId: "forumpost-24969",
+    storageBucket: "forumpost-24969.appspot.com",
+    messagingSenderId: "231952885510"
+};
+
+firebase.initializeApp(config);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    reducer: reducer,
-    auth: authReducer
+    symbol: symbol,
+    auth: authReducer,
+    topic: topic
 });
 
 const store = createStore(rootReducer, composeEnhancers(

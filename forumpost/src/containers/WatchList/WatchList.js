@@ -41,8 +41,8 @@ class WatchList extends Component {
 
 const mapStateToProps = state => {
     return {
-        stockData: state.reducer.stockData,
-        watchList: state.reducer.watchList
+        stockData: state.symbol.stockData,
+        watchList: state.symbol.watchList
     };
 };
 

@@ -33,6 +33,13 @@ class navbar extends Component {
         if(this.props.isAuthenticated){
             links = <li><NavLink to='/logout'>Logout</NavLink></li>
         }
+        let initial = null;
+        console.log(this.props.initial);
+        if(this.props.initial !=null){
+            initial = <li><NavLink to='/' className='btn btn-floating pink lighten-1'>
+            {this.props.initial}
+            </NavLink></li>
+        }
         return (
             <nav className="nav-wrapper grey darken-3">
                   <div className="container mr-auto">
@@ -47,6 +54,7 @@ class navbar extends Component {
                   <ul className="right">
                       {/* <li><NavLink to='/signin'>Sign In</NavLink></li> */}
                       {links}
+                      {initial}
                   </ul>
                   </div>
               </nav>
@@ -57,13 +65,15 @@ class navbar extends Component {
 const mapStateToProps = state => {
     return {
         // stockData: state.stockData
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        initial: state.auth.initial
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSearch: (symbol) => dispatch(actions.searchSymbol(symbol))
+        onSearch: (symbol) => dispatch(actions.searchSymbol(symbol)),
+        onSetAuthRedirectPath: (path)  => dispatch(actions.setAuthRedirectPath(path))
     };
 };
 

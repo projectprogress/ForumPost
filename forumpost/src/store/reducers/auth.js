@@ -5,7 +5,9 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
-    authRedirectPath: '/'
+    authRedirectPath: '/',
+    initial: null,
+    email: null
 };
 
 const reducer = ( state = initialState, action ) => {
@@ -41,6 +43,12 @@ const reducer = ( state = initialState, action ) => {
                 ...state,
                 authRedirectPath: action.path
             };
+        case actionTypes.GET_USER_SUCCESS:
+            return {
+                ...state,
+                initial: action.initials,
+                email: action.email
+            }
         default:
             return state;
     }

@@ -20,15 +20,17 @@ class SignUp extends Component {
     handleSubmit = (e) => {
         // console.log(e)
         e.preventDefault();
-        // console.log(this.state);
-        // this.props.signUp(this.state);
-        this.props.onAuth(this.state.email, this.state.password, this.state.isSignup);
+        this.props.onAuth(this.state.email, this.state.password, this.state.isSignup, this.state.firstName, this.state.lastName);
     }
     render() {
-        // const { authError, auth } = this.props;
-        // if(auth.uid) return <Redirect to='/' />
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to='/'/>
+        }
+
         return (
             <div className="container">
+                {authRedirect}
                 <form onSubmit={this.handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Sign Up</h5>
                     <div className="input-field">
@@ -63,11 +65,19 @@ class SignUp extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
-        // onSetAuthRedirectPath: ()  => dispatch(actions.setAuthRedirectPath('/'))
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+        authRedirectPath: state.auth.authRedirectPath
     };
 };
 
-export default connect(null,mapDispatchToProps)(SignUp);
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password, isSignup, firstName, lastName) => dispatch(actions.auth(email, password, isSignup, firstName, lastName))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

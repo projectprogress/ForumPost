@@ -3,7 +3,7 @@ export {
     successAddWatchList,
     deleteWatchList,
     showFocusList
-} from './action';
+} from './symbol';
 
 export {
     auth,
@@ -11,3 +11,9 @@ export {
     setAuthRedirectPath,
     authCheckState
 } from './auth';
+
+export {
+    createTopic,
+    showTopicList,
+    createInit
+} from './topic';

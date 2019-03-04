@@ -6,14 +6,6 @@ import FocusSummary from '../../components/FocusListSummary/FocusListSummary';
 class FocusList extends Component {
 
     componentDidMount () {
-        console.log(this.props);
-        // axios.get('')
-        //     .then(response => {
-        //         this.setState({ingredients: response.data })
-        //     })
-        //     .catch( error =>{
-        //         this.setState({error: true});
-        //     });
         this.props.onFocus();
 
     }
@@ -48,8 +40,8 @@ class FocusList extends Component {
 
 const mapStateToProps = state => {
     return {
-        FocusList: state.reducer.FocusList,
-        focusListError: state.reducer.focusListError
+        FocusList: state.symbol.FocusList,
+        focusListError: state.symbol.focusListError
     };
 };
 

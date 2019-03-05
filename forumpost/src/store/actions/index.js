@@ -1,8 +1,11 @@
 export {
     searchSymbol,
+    searchSymbolInit,
     successAddWatchList,
     deleteWatchList,
-    showFocusList
+    showFocusList,
+    getSymbolDetail,
+    getSymbolInit
 } from './symbol';
 
 export {
@@ -15,5 +18,7 @@ export {
 export {
     createTopic,
     showTopicList,
-    createInit
+    createInit,
+    getTopicDetail,
+    getInit
 } from './topic';

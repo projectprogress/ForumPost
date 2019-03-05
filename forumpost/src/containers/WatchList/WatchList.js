@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
-import WatchListSummary from '../../components/WatchListSummary/WatchListSummary';
+import WatchListSummary from '../../components/WatchList/WatchListSummary';
+import { Link } from 'react-router-dom';
 
 class WatchList extends Component {
 
@@ -19,13 +20,13 @@ class WatchList extends Component {
             result = (
                 <div className="dashboard container">
                         {this.props.watchList.map((listItem, index) => (
-                            <div className="project-list section" key = {index}>
+                            <Link to={'/symbol/' + listItem.symbol} key={listItem.symbol}>
                                 <WatchListSummary 
                                     watchList= {listItem}
                                     DeleteItem= {() => this.handleDeleteWatchList(index)}/>
                                 {/* <p> {listItem.symbol}</p>
                                 <button className="btn pink lighten-1 z-depth-0" onClick={() => this.handleDeleteWatchList(index)}>Delete</button> */}
-                            </div>
+                            </Link>
                         ))}
                         {/* <p> abc 123</p> */}
                 </div>

@@ -4,7 +4,9 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     topicList: [],
     topicListError: false,
-    created: false
+    created: false,
+    topicDetail: null,
+    topicLoading: false
     
 }
 
@@ -30,6 +32,17 @@ const topic = (state = initialState, action) => {
             return {
                 ...state,
                 created: true
+            };
+        case actionTypes.GET_DETAIL_SUCCESS :
+            return {
+                ...state,
+                topicDetail: action.topicDetail,
+                topicLoading: true
+            };
+        case actionTypes.GET_INIT :
+            return {
+                ...state,
+                topicLoading: false
             };
         default:
             return state;

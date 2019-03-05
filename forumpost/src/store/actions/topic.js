@@ -67,3 +67,37 @@ export const fetchTopicListFailed = () => {
         type: actionTypes.FETCH_TOPICLIST_FAILED
     };
 };
+
+export const getTopicDetail = (topicID) => {
+    return dispatch => {
+        axios.get('https://forumpost-24969.firebaseio.com/topics/' + topicID + '.json')
+            .then(response => {
+                console.log(response.data);
+                dispatch(getDetailSuccess(response.data))
+            })
+            .catch( error => {
+                console.log("failed");
+                dispatch(getDetailFailed())
+            });
+
+    }
+}
+
+export const getDetailSuccess  = (topicDetail) => {
+    return {
+        type: actionTypes.GET_DETAIL_SUCCESS,
+        topicDetail: topicDetail
+    };
+};
+
+export const getDetailFailed = () => {
+    return {
+        type: actionTypes.GET_DETAIL_FAIL
+    };
+};
+
+export const getInit = () => {
+    return {
+        type: actionTypes.GET_INIT
+    };
+};

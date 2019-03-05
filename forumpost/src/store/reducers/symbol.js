@@ -3,9 +3,13 @@ import { bake_cookie, read_cookie } from 'sfcookies';
 
 const initialState = {
     stockData: [],
+    searchSymbolSuccess: false,
+    searchSymbolStart: false,
     watchList: read_cookie('WatchList'),
     FocusList: [],
-    focusListError: false
+    focusListError: false,
+    symbolDetail: null,
+    symbolLoading: false
 }
 
 const symbol = (state = initialState, action) => {
@@ -13,12 +17,21 @@ const symbol = (state = initialState, action) => {
         case actionTypes.SEARCH_SYMBOL:
             console.log('search symbol');
             return state;
+        case actionTypes.SEARCH_SYMBOL_INIT: 
+        console.log('init symbol');
+            return {
+                ...state,
+                searchSymbolSuccess: false,
+                searchSymbolStart : true
+            };
         case actionTypes.FETCH_SYMBOL_SUCCESS :
             console.log('search success');
             console.log(action.stockData);
             return {
                 ...state,
-                stockData: action.stockData
+                stockData: action.stockData,
+                searchSymbolSuccess: true,
+                searchSymbolStart: false
             };
         case actionTypes.ADD_WATCHLIST :
             console.log('add success');
@@ -55,6 +68,17 @@ const symbol = (state = initialState, action) => {
             return {
                 ...state,
                 focusListError: true
+            };
+        case actionTypes.GET_SYMBOL_DETAIL_SUCCESS :
+            return {
+                ...state,
+                symbolDetail: action.symbolDetail,
+                symbolLoading: true
+            };
+        case actionTypes.GET_SYMBOL_INIT :
+            return {
+                ...state,
+                symbolLoading: false
             };
         default:
             return state;

@@ -18,6 +18,12 @@ export const searchSymbol = (symbol) => {
     };
 };
 
+export const searchSymbolInit = () => {
+    return {
+        type: actionTypes.SEARCH_SYMBOL_INIT
+    };
+}
+
 export const fetchSymbolSuccess = (stockData) => {
     return {
         type: actionTypes.FETCH_SYMBOL_SUCCESS,
@@ -64,5 +70,41 @@ export const successAddWatchList = (stockData) => {
     return {
         type: actionTypes.ADD_WATCHLIST,
         stockData: stockData
+    };
+};
+
+export const getSymbolInit = () => {
+    return {
+        type: actionTypes.GET_SYMBOL_INIT
+    };
+};
+
+export const getSymbolDetail = (symbol) => {
+    return dispatch => {
+        console.log(symbol);
+        const symbolData = symbol + '/quote';
+        axios.get('https://api.iextrading.com/1.0/stock/' + symbolData)
+            .then(response => {
+                console.log(response.data);
+                dispatch(getSymbolDetailSuccess(response.data))
+            })
+            .catch( error => {
+                console.log("failed");
+                dispatch(getSymbolFailed())
+            });
+
+    }
+}
+
+export const getSymbolDetailSuccess  = (symbolDetail) => {
+    return {
+        type: actionTypes.GET_SYMBOL_DETAIL_SUCCESS,
+        symbolDetail: symbolDetail
+    };
+};
+
+export const getSymbolFailed = () => {
+    return {
+        type: actionTypes.GET_SYMBOL_DETAIL_FAIL
     };
 };

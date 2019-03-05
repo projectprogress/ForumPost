@@ -19,6 +19,7 @@ class navbar extends Component {
         console.log(this.state.symbol);
         e.preventDefault();
         // console.log(this.state)
+        this.props.searchSymbolInit();
         this.props.onSearch(this.state.symbol);
         this.props.history.push('/searchresult');
     }
@@ -73,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSearch: (symbol) => dispatch(actions.searchSymbol(symbol)),
-        onSetAuthRedirectPath: (path)  => dispatch(actions.setAuthRedirectPath(path))
+        onSetAuthRedirectPath: (path)  => dispatch(actions.setAuthRedirectPath(path)),
+        searchSymbolInit: () => dispatch(actions.searchSymbolInit())
     };
 };
 

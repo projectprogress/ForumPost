@@ -18,7 +18,7 @@ const symbol = (state = initialState, action) => {
             console.log('search symbol');
             return state;
         case actionTypes.SEARCH_SYMBOL_INIT: 
-        console.log('init symbol');
+            console.log('init symbol');
             return {
                 ...state,
                 searchSymbolSuccess: false,

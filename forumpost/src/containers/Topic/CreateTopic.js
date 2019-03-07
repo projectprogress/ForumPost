@@ -22,7 +22,7 @@ class CreateTopic extends Component {
         // this.props.history.push('/');
 
     }
-    componentWillMount() {
+    componentDidMount() {
         console.log('componentWillMount');
         this.props.createInit();
 

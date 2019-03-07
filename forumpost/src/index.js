@@ -9,6 +9,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import symbol from './store/reducers/symbol';
 import authReducer from './store/reducers/auth';
 import topic from './store/reducers/topic';
+import comment from './store/reducers/comment';
 import thunk from 'redux-thunk';
 import firebase from 'firebase/app';
 import 'firebase/database'; 
@@ -30,7 +31,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
     symbol: symbol,
     auth: authReducer,
-    topic: topic
+    topic: topic,
+    comment: comment
 });
 
 const store = createStore(rootReducer, composeEnhancers(

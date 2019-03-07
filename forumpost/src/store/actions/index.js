@@ -22,3 +22,8 @@ export {
     getTopicDetail,
     getInit
 } from './topic';
+
+export {
+    createComment,
+    getComment
+} from './comment';
